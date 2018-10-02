@@ -1,6 +1,7 @@
 # TWAirline
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
+Please First Run `npm install` to add all the dev dependencies
 
 ## Development server
 
