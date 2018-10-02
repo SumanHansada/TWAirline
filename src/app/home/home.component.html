@@ -1,0 +1,244 @@
+<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary"
+style="background-image: url('assets/backgroundmain.jpg'); background-size:100%">
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <a class="navbar-brand" style="color: grey">Flight Search Engine</a>
+    </div>
+  </div>
+</nav>
+<hr>
+<div class="container" style="background-image: url('/assets/backgroundmain.jpg');
+background-repeat: no-repeat;
+background-size: 100% 100%;">
+  <div class="row">
+    <div class="col-md-3 flightsearch" style="border:0px solid; padding:5px; border-radius:.25rem">
+      <ngb-tabset>
+        <ngb-tab>
+          <ng-template ngbTabTitle><b (click)="changeflightType('onewayFlight')">One Way</b></ng-template>
+
+          <ng-template ngbTabContent>
+            <form #OneWayFlight="ngForm">
+              <br>
+              <div class="form-group">
+                <label>Origin : </label>
+                <ng-select [ngClass]="{'show-error': showErrors || flightSearch.Origin == null}" [items]="airportLists"
+                  bindLabel="city" bindValue="icode" [(ngModel)]="flightSearch.Origin" name="Origin">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{item.city}} - <b>({{item.icode}})</b>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Destination : </label>
+                <ng-select [ngClass]="{'show-error': showErrors || flightSearch.Destination == null}" [items]="airportLists"
+                  bindLabel="city" bindValue="icode" [(ngModel)]="flightSearch.Destination" name="Destination">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{item.city}} - <b>({{item.icode}})</b>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Departure Date : </label>
+                <div class="input-group">
+                  <input [ngClass]="{'show-error': showErrors || flightSearch.DepartureDate == null}" [(ngModel)]="flightSearch.DepartureDate"
+                    class="form-control" placeholder="Departure Date in yyyy-mm-dd" name="DepartureDate" ngbDatepicker
+                    #d="ngbDatepicker" (click)="d.toggle()">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>No of Passengers : </label>
+                <input [ngClass]="{'show-error': showErrors || flightSearch.PassangersCount == null}" [(ngModel)]="flightSearch.PassangersCount"
+                  name="PassengersCount" id="NoofPassengers" type="number" class="form-control" placeholder="Enter No of Passengers">
+              </div>
+
+              <button type="submit" class="btn btn-primary" (click)="searchFlights('onewayFlight')">Search</button>
+              <hr>
+              <div class="refineSearch" style="border:0px solid; padding:5px; border-radius:.25rem">
+                <label>Refine Flight Search : </label>
+                <div style="width: 240px;">
+                  <range-slider name="PriceRange" [min]="minFlightPrice" [max]="maxFlightPrice" [(ngModel)]="flightSearch.PriceRange"
+                    (onRangeChange)="rangeChanged($event)">
+                  </range-slider>
+                </div>
+              </div>
+            </form>
+          </ng-template>
+
+
+        </ngb-tab>
+
+        <ngb-tab>
+          <ng-template ngbTabTitle><b (click)="changeflightType('returnFlight')">Return</b></ng-template>
+          <ng-template ngbTabContent>
+            <form #ReturnFlight="ngForm">
+              <br>
+              <div class="form-group">
+                <label>Origin : </label>
+                <ng-select [items]="airportLists" [ngClass]="{'show-error': showErrors || flightSearch.Origin == null}"
+                  bindLabel="city" bindValue="icode" [(ngModel)]="flightSearch.Origin" name="Origin">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{item.city}} - <b>({{item.icode}})</b>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Destination : </label>
+                <ng-select [items]="airportLists" [ngClass]="{'show-error': showErrors || flightSearch.Destination == null}"
+                  bindLabel="city" bindValue="icode" [(ngModel)]="flightSearch.Destination" name="Destination">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{item.city}} - <b>({{item.icode}})</b>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Departure Date : </label>
+                <div class="input-group">
+                  <input [ngClass]="{'show-error': showErrors || flightSearch.DepartureDate == null}" [(ngModel)]="flightSearch.DepartureDate"
+                    class="form-control" placeholder="Departure Date in yyyy-mm-dd" name="DepartureDate" ngbDatepicker
+                    #d="ngbDatepicker" (click)="d.toggle()">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Return Date : </label>
+                <div class="input-group">
+                  <input [ngClass]="{'show-error': showErrors || flightSearch.ReturnDate == null}" [(ngModel)]="flightSearch.ReturnDate"
+                    class="form-control" placeholder="Departure Date in yyyy-mm-dd" name="ReturnDate" ngbDatepicker #r="ngbDatepicker"
+                    (click)="r.toggle()">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>No of Passengers : </label>
+                <input [ngClass]="{'show-error': showErrors || flightSearch.PassangersCount == null}" [(ngModel)]="flightSearch.PassangersCount"
+                  name="PassangersCount" id="NoofPassengers" type="number" class="form-control" placeholder="Enter No of Passengers">
+              </div>
+
+              <button type="submit" class="btn btn-primary" (click)="searchFlights('returnFlight')">Search</button>
+              <hr>
+              <div class="refineSearch" style="border:0px solid; padding:5px; border-radius:.25rem">
+                <label>Refine Flight Search : </label>
+                <div style="width: 240px;">
+                  <range-slider name="PriceRange" [min]="minFlightPrice" [max]="maxFlightPrice" [(ngModel)]="flightSearch.PriceRange"
+                    (onRangeChange)="rangeChanged($event)">
+                  </range-slider>
+                </div>
+              </div>
+            </form>
+          </ng-template>
+
+        </ngb-tab>
+
+
+      </ngb-tabset>
+
+    </div>
+    <div class="col-md-9 flightdetails" style="border:0px solid; padding:5px; border-radius:.25rem">
+      <div *ngIf="flightType==='onewayFlight' && filterdFlights.length > 0">
+        <div class="container" style="border:0px solid; padding:5px; border-radius:.25rem;">
+          <div class="row">
+            <div class="col-md-8">
+              <h2>{{flightSearch.Origin}} > {{flightSearch.Destination}}</h2>
+            </div>
+            <div class="col-md-4">
+              Depart Date : {{flightSearch.DepartureDate | date }}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div *ngIf="flightType==='onewayFlight' && filterdFlights.length > 0" class="container" style="border:0px solid; padding:5px; border-radius:.25rem;">
+          <div *ngFor="let flight of filterdFlights">
+            <div class="row">
+              <div class="col-md-9">
+                <h3>{{flight.Fare | currency: 'INR'}}</h3>
+                <h6>{{flight.FlightNo}}</h6>
+                <h5>{{flight.Origin}} > {{flight.Destination}}</h5>
+                <h5>Depart: {{flight.DepartureTime | date: 'shortTime'}}</h5>
+                <h5>Arrive: {{flight.ArrivalTime | date: 'shortTime'}}</h5>
+                <h5>No of Passangers: {{flightSearch.PassangersCount}}</h5>
+              </div>
+              <div class="col-md-3">
+                <img src="logo/{{flight.Airline}}.jpg" width="150px" height="150px">
+                <hr>
+                <div style="text-align: center">
+                  <button class="btn btn-primary">Book This Flight</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="flightType==='returnFlight' && filteredReturnFlights.length > 0">
+        <div class="container" style="border:0px solid; padding:5px; border-radius:.25rem;">
+          <div class="row">
+            <div class="col-md-8">
+              <h2>{{flightSearch.Origin}} > {{flightSearch.Destination}} > {{flightSearch.Origin}}</h2>
+            </div>
+            <div class="col-md-4">
+              Depart Date : {{flightSearch.DepartureDate | date }}
+              <br>
+              Return Date : {{flightSearch.ReturnDate | date }}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div *ngIf="flightType==='returnFlight' && filteredReturnFlights.length > 0" class="container" style="border:0px solid; padding:5px; border-radius:.25rem;">
+          <div *ngFor="let flight of filteredReturnFlights">
+            <div class="row">
+              <div class="col-md-6">
+                <h3>Total Fare: {{flight.DepartureFare + flight.ReturnFare | currency: 'INR'}}</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3>{{flight.DepartureFare | currency: 'INR'}}</h3>
+                    <h6>{{flight.DepartureFlightNo}}</h6>
+                    <h5>{{flight.DepartureOrigin}} > {{flight.DepartureDestination}}</h5>
+                    <h5>Depart: {{flight.DepartureTime | date: 'shortTime'}}</h5>
+                    <h5>Arrive: {{flight.ArrivalTime | date: 'shortTime'}}</h5>
+                    <h5>No of Passangers: {{flightSearch.PassangersCount}}</h5>
+                  </div>
+                  <div class="col-md-6">
+                    <h3>{{flight.ReturnFare | currency: 'INR'}}</h3>
+                    <h6>{{flight.ReturnFlightNo}}</h6>
+                    <h5>{{flight.ReturnOrigin}} > {{flight.ReturnDestination}}</h5>
+                    <h5>Depart: {{flight.ReturnTime | date: 'shortTime'}}</h5>
+                    <h5>Arrive: {{flight.ReturnArrivalTime | date: 'shortTime'}}</h5>
+                    <h5>No of Passangers: {{flightSearch.PassangersCount}}</h5>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="col-md-3">
+                <img src="logo/{{flight.DepartureAirline}}.jpg" width="150px" height="150px">
+                <hr>
+                <div style="text-align: center">
+                  <button class="btn btn-primary">Book Departure Flight</button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <img src="logo/{{flight.ReturnAirline}}.jpg" width="150px" height="150px">
+                <hr>
+                <div style="text-align: center">
+                  <button class="btn btn-primary">Book Return Flight</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(flightType==='onewayFlight' && filterdFlights.length === 0)
+          || (flightType==='returnFlight' && filteredReturnFlights.length === 0)">
+        <div class="error-template" style="text-align: center; display: block; padding: 40px; color:grey">
+          <h1>Oops!</h1>
+          <h2>404 Flights Not Found</h2>
+          <h3>Sorry! We didn't find any flights...</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<hr>
+<footer style="text-align: right">
+  Copyright &copy; {{today.getFullYear()}} - Suman Kumar Hansada
+</footer>

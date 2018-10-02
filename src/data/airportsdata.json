@@ -1,0 +1,97 @@
+[
+  {
+  "city": "Delhi",
+  "icode": "DEL",
+  "name": "Indira Gandhi International Airport"
+  },
+  {
+    "city": "Mumbai",
+    "icode": "BOM",
+    "name": "Chhatrapati Shivaji International Airport"
+  },
+  {
+    "city": "Kolkata",
+    "icode": "CCU",
+    "name": "Netaji Subhash Chandra Bose International Airport"
+  },
+  {
+    "city": "Chennai",
+    "icode": "MAA",
+    "name": "Chennai International Airport"
+  },
+  {
+    "city": "Jaipur",
+    "icode": "JAI",
+    "name": "Jaipur International Airport"
+  },
+  {
+    "city": "Bhubneshwar",
+    "icode": "BBI",
+    "name": "Biju Patnaik Airport"
+  },
+  {
+    "city": "Patna",
+    "icode": "PAT",
+    "name": "Lok Nayak Jayaprakash Airpor"
+  },
+  {
+    "city": "Ranchi",
+    "icode": "IXR",
+    "name": "Birsa Munda Airport"
+  },
+  {
+    "city": "Bengaluru",
+    "icode": "BLR",
+    "name": "Bengaluru International Airport"
+  },
+  {
+    "city": "Vijaywada",
+    "icode": "VGA",
+    "name": "Vijayawada Airport"
+  },
+  {
+    "city": "Chandigarh",
+    "icode": "IXC",
+    "name": "Chandigarh Airport"
+  },
+  {
+    "city": "Dehradun",
+    "icode": "DED",
+    "name": "Dehradun Airport"
+  },
+  {
+    "city": "Pune",
+    "icode": "PNQ",
+    "name": "Pune Airport"
+  },
+  {
+    "city": "Gandhinagar",
+    "icode": "ISK",
+    "name": "Gandhinagar Airport"
+  },
+  {
+    "city": "Nagpur",
+    "icode": "NAG",
+    "name": "Dr. Babasaheb Ambedkar International Airport"
+  },
+  {
+    "city": "Surat",
+    "icode": "STV",
+    "name": "Surat Airport"
+  },
+  {
+    "city": "Lucknow",
+    "icode": "LKO",
+    "name": "Chaudhary Charan Singh International Airport"
+  },
+  {
+    "city": "Bhopal",
+    "icode": "BHO",
+    "name": "Bhopal Airport"
+  },
+  {
+    "city": "Hyderabad",
+    "icode": "HYD",
+    "name": "Rajiv Gandhi International Airport, Shamshabad"
+  }
+]
